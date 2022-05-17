@@ -8,6 +8,9 @@ import RecentExpences from './src/screens/RecentExpences';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AddExpenseButton from './src/components/AddExpenseButton';
 import ManageExpenses from './src/screens/ManageExpenses';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import { GlobalStyles } from './src/helpers/styles';
 
 const Tabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -18,15 +21,33 @@ const ExpensesOverview = () => {
       screenOptions={{
         headerRight: () => <AddExpenseButton />,
         headerStyle: {
-          backgroundColor: '#79DAE8',
+          backgroundColor: GlobalStyles.colors.primary500,
         },
         tabBarStyle: {
-          backgroundColor: '#79DAE8',
+          backgroundColor: GlobalStyles.colors.primary500,
         },
+        headerTintColor: 'white',
+        tabBarActiveTintColor: GlobalStyles.colors.accent500,
       }}
     >
-      <Tabs.Screen name="Recent" component={RecentExpences} />
-      <Tabs.Screen name="All" component={AllExpenses} />
+      <Tabs.Screen
+        name="Recent"
+        component={RecentExpences}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Ionicons name="hourglass-outline" size={size} color={color} />
+          ),
+          title: 'Recent Expeneses',
+          tabBarLabel: 'Recent',
+        }}
+      />
+      <Tabs.Screen
+        name="All"
+        component={AllExpenses}
+        options={{
+          tabBarIcon: ({ size, color }) => <Ionicons name="calendar" size={size} color={color} />,
+        }}
+      />
     </Tabs.Navigator>
   );
 };
@@ -34,19 +55,21 @@ const ExpensesOverview = () => {
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="ExpensesOverview"
-            component={ExpensesOverview}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="ManageExpenses" component={ManageExpenses} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <StatusBar style="light" />
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="ExpensesOverview"
+              component={ExpensesOverview}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="ManageExpenses" component={ManageExpenses} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

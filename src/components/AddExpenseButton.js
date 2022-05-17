@@ -4,8 +4,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 const AddExpenseButton = ({onPress}) => {
   return (
     <View style={styles.container}>
-      <Pressable>
-        <Ionicons name="add" size={26} color='black' />
+      <Pressable onPress={onPress}>
+        <Ionicons name="add" size={26} color='white' />
       </Pressable>
     </View>
   );
