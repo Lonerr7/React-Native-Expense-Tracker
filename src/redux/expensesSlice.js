@@ -8,13 +8,13 @@ const initialState = {
       id: uuidv4(),
       title: 'Computer',
       price: 14.99,
-      date: new Date(2022, 1, 24),
+      date: new Date(2022, 4, 24),
     },
     {
       id: uuidv4(),
       title: 'PS5',
       price: 33.33,
-      date: new Date(2022, 1, 24),
+      date: new Date(2022, 1, 11),
     },
   ],
 };
