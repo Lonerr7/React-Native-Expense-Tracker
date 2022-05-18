@@ -1,2 +1,4 @@
 export const countTotalPrice = (arr) =>
-  arr.reduce((prev, current) => prev.price + current.price);
+  arr.reduce((prev, current) => {
+    return prev + current.price;
+  }, 0);

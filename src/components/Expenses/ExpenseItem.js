@@ -1,21 +1,28 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { GlobalStyles } from '../../helpers/styles';
 
 const ExpenseItem = ({ title, date, price }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.textBox}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date.toLocaleDateString()}</Text>
-      </View>
-      <View style={styles.priceBox}>
-        <Text style={styles.price}>{price}</Text>
-      </View>
+    <View>
+      <Pressable style={({ pressed }) => (pressed ? styles.pressedStyle : '')}>
+        <View style={styles.container}>
+          <View style={styles.textBox}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.date}>{date.toLocaleDateString()}</Text>
+          </View>
+          <View style={styles.priceBox}>
+            <Text style={styles.price}>{price}</Text>
+          </View>
+        </View>
+      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  pressedStyle: {
+    opacity: 0.7,
+  },
   container: {
     padding: 12,
     width: '100%',

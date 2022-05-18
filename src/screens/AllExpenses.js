@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import ExpenseItem from '../components/Expenses/ExpenseItem';
 import ExpensesInfo from '../components/Expenses/ExpensesInfo';
@@ -17,12 +17,22 @@ const AllExpenses = () => {
     />
   ));
 
+  const renderItem = ({ item }) => {
+    return (
+      <ExpenseItem date={item.date} price={item.price} title={item.title} />
+    );
+  };
+
   const totalPrice = countTotalPrice(expenses);
 
   return (
     <View style={styles.container}>
       <ExpensesInfo timePeriod={'Total'} totalPrice={totalPrice} />
-      {expensesElements}
+      <FlatList
+        data={expenses}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };
