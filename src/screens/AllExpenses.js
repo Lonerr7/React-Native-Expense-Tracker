@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import ExpenseItem from '../components/Expenses/ExpenseItem';
+import ExpensesInfo from '../components/Expenses/ExpensesInfo';
+import { countTotalPrice } from '../helpers/helpers';
 import { GlobalStyles } from '../helpers/styles';
 
 const AllExpenses = () => {
@@ -15,7 +17,14 @@ const AllExpenses = () => {
     />
   ));
 
-  return <View style={styles.container}>{expensesElements}</View>;
+  const totalPrice = countTotalPrice(expenses);
+
+  return (
+    <View style={styles.container}>
+      <ExpensesInfo timePeriod={'Total'} totalPrice={totalPrice} />
+      {expensesElements}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -23,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: GlobalStyles.colors.primary800,
     paddingHorizontal: 15,
-    paddingTop: 30
+    paddingTop: 30,
   },
 });
 
