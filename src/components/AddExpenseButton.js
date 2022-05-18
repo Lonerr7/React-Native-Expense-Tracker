@@ -1,11 +1,11 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const AddExpenseButton = ({onPress}) => {
+const AddExpenseButton = ({ onPress }) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress}>
-        <Ionicons name="add" size={26} color='white' />
+        <Ionicons name="add" size={26} color="white" />
       </Pressable>
     </View>
   );

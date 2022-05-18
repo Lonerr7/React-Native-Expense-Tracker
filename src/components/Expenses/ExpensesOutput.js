@@ -3,10 +3,15 @@ import { countTotalPrice } from '../../helpers/helpers';
 import ExpenseItem from './ExpenseItem';
 import ExpensesInfo from './ExpensesInfo';
 
-const ExpensesOutput = ({ expenses }) => {
+const ExpensesOutput = ({ expenses, timePeriod }) => {
   const renderItem = ({ item }) => {
     return (
-      <ExpenseItem date={item.date} price={item.price} title={item.title} />
+      <ExpenseItem
+        date={item.date}
+        price={item.price}
+        title={item.title}
+        id={item.id}
+      />
     );
   };
 
@@ -14,7 +19,7 @@ const ExpensesOutput = ({ expenses }) => {
 
   return (
     <View>
-      <ExpensesInfo timePeriod={'Total'} totalPrice={totalPrice} />
+      <ExpensesInfo timePeriod={timePeriod} totalPrice={totalPrice} />
       <FlatList
         data={expenses}
         renderItem={renderItem}
