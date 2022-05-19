@@ -8,61 +8,13 @@ const initialState = {
       id: uuidv4(),
       title: 'Computer',
       price: 14.99,
-      date: new Date(2022, 4, 24),
+      date: new Date(2022, 4, 14),
     },
     {
       id: uuidv4(),
       title: 'PS5',
       price: 33.33,
-      date: new Date(2022, 1, 11),
-    },
-    {
-      id: uuidv4(),
-      title: 'Computer',
-      price: 14.99,
-      date: new Date(2022, 4, 24),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS5',
-      price: 33.33,
-      date: new Date(2022, 1, 11),
-    },
-    {
-      id: uuidv4(),
-      title: 'Computer',
-      price: 14.99,
-      date: new Date(2022, 4, 24),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS5',
-      price: 33.33,
-      date: new Date(2022, 1, 11),
-    },
-    {
-      id: uuidv4(),
-      title: 'Computer',
-      price: 14.99,
-      date: new Date(2022, 4, 24),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS5',
-      price: 33.33,
-      date: new Date(2022, 1, 11),
-    },
-    {
-      id: uuidv4(),
-      title: 'Computer',
-      price: 14.99,
-      date: new Date(2022, 4, 24),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS5',
-      price: 33.33,
-      date: new Date(2022, 1, 11),
+      date: new Date(2022, 4, 14),
     },
   ],
 };
@@ -76,8 +28,28 @@ const expensesSlice = createSlice({
         (expense) => expense.id !== action.payload.id
       );
     },
+    addExpense: (state, action) => {
+      state.expenses.push({
+        ...action.payload,
+        id: uuidv4(),
+      });
+    },
+    updateExpense: (state, action) => {
+      state.expenses = state.expenses.map((exp) => {
+        if (exp.id === action.payload.id) {
+          exp = {
+            ...action.payload.updatedExpense,
+            id: exp.id,
+          };
+          return exp;
+        }
+
+        return exp;
+      });
+    },
   },
 });
 
-export const { deleteExpense } = expensesSlice.actions;
+export const { deleteExpense, addExpense, updateExpense } =
+  expensesSlice.actions;
 export default expensesSlice.reducer;
