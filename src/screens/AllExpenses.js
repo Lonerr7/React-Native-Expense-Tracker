@@ -8,7 +8,7 @@ const AllExpenses = () => {
 
   return (
     <View style={styles.container}>
-      <ExpensesOutput timePeriod='All' expenses={expenses} />
+      <ExpensesOutput timePeriod="All" expenses={expenses} />
     </View>
   );
 };
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary800,
     paddingHorizontal: 15,
     paddingTop: 30,
-    paddingBottom: 0
   },
 });
 

@@ -1,8 +1,11 @@
 import { useLayoutEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
+import { useDispatch } from 'react-redux';
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import ManageExpenseCustomButton from '../components/ManageExpenseCustomButton';
 import ManageExpenseDeleteButton from '../components/ManageExpenseDeleteButton';
 import { GlobalStyles } from '../helpers/styles';
+import { deleteExpense } from '../redux/expensesSlice';
 
 const ManageExpense = ({ route, navigation }) => {
   const id = route.params?.expenseId;
@@ -28,6 +31,7 @@ const ManageExpense = ({ route, navigation }) => {
   if (id) {
     return (
       <View style={styles.container}>
+        <ExpenseForm />
         <View style={[styles.buttonsBox, styles.buttonsEditBox]}>
           <ManageExpenseCustomButton title="Cancel" onPress={cancelHandler} />
           <ManageExpenseCustomButton
@@ -38,7 +42,7 @@ const ManageExpense = ({ route, navigation }) => {
           />
         </View>
         <View>
-          <ManageExpenseDeleteButton />
+          <ManageExpenseDeleteButton id={id} navigation={navigation} />
         </View>
       </View>
     );
@@ -46,6 +50,7 @@ const ManageExpense = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttonsBox}>
         <ManageExpenseCustomButton title="Cancel" onPress={cancelHandler} />
         <ManageExpenseCustomButton

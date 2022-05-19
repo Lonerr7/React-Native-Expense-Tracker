@@ -11,7 +11,7 @@ const RecentExpences = () => {
 
   return (
     <View style={styles.container}>
-      <ExpensesOutput timePeriod='Last 7 days' expenses={filteredExpenses} />
+      <ExpensesOutput timePeriod="Last 7 days" expenses={filteredExpenses} />
     </View>
   );
 };

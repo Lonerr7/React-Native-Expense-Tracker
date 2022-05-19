@@ -1,13 +1,20 @@
 import { Pressable, View, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles } from '../helpers/styles';
+import { useDispatch } from 'react-redux';
+import { deleteExpense } from '../redux/expensesSlice';
 
-const ManageExpenseDeleteButton = ({ onPress }) => {
+const ManageExpenseDeleteButton = ({ id, navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.rootContainer}>
       <Pressable
         style={({ pressed }) => (pressed ? styles.pressStyle : '')}
-        onPress={onPress}
+        onPress={() => {
+          dispatch(deleteExpense({ id }));
+          navigation.goBack();
+        }}
       >
         <Ionicons
           name="trash-bin"

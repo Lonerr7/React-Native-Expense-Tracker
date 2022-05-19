@@ -16,14 +16,68 @@ const initialState = {
       price: 33.33,
       date: new Date(2022, 1, 11),
     },
+    {
+      id: uuidv4(),
+      title: 'Computer',
+      price: 14.99,
+      date: new Date(2022, 4, 24),
+    },
+    {
+      id: uuidv4(),
+      title: 'PS5',
+      price: 33.33,
+      date: new Date(2022, 1, 11),
+    },
+    {
+      id: uuidv4(),
+      title: 'Computer',
+      price: 14.99,
+      date: new Date(2022, 4, 24),
+    },
+    {
+      id: uuidv4(),
+      title: 'PS5',
+      price: 33.33,
+      date: new Date(2022, 1, 11),
+    },
+    {
+      id: uuidv4(),
+      title: 'Computer',
+      price: 14.99,
+      date: new Date(2022, 4, 24),
+    },
+    {
+      id: uuidv4(),
+      title: 'PS5',
+      price: 33.33,
+      date: new Date(2022, 1, 11),
+    },
+    {
+      id: uuidv4(),
+      title: 'Computer',
+      price: 14.99,
+      date: new Date(2022, 4, 24),
+    },
+    {
+      id: uuidv4(),
+      title: 'PS5',
+      price: 33.33,
+      date: new Date(2022, 1, 11),
+    },
   ],
 };
 
 const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteExpense: (state, action) => {
+      state.expenses = state.expenses.filter(
+        (expense) => expense.id !== action.payload.id
+      );
+    },
+  },
 });
 
-export const {} = expensesSlice.actions;
+export const { deleteExpense } = expensesSlice.actions;
 export default expensesSlice.reducer;

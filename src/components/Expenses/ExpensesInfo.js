@@ -5,7 +5,7 @@ const ExpensesInfo = ({ timePeriod, totalPrice }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.timePeriod}>{timePeriod}</Text>
-      <Text style={styles.totalPrice}>${totalPrice}</Text>
+      <Text style={styles.totalPrice}>${totalPrice.toFixed(2)}</Text>
     </View>
   );
 };

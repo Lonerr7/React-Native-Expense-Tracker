@@ -1,4 +1,4 @@
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { countTotalPrice } from '../../helpers/helpers';
 import ExpenseItem from './ExpenseItem';
 import ExpensesInfo from './ExpensesInfo';
@@ -18,7 +18,7 @@ const ExpensesOutput = ({ expenses, timePeriod }) => {
   const totalPrice = countTotalPrice(expenses);
 
   return (
-    <View>
+    <View style={styles.container}>
       <ExpensesInfo timePeriod={timePeriod} totalPrice={totalPrice} />
       <FlatList
         data={expenses}
@@ -28,5 +28,11 @@ const ExpensesOutput = ({ expenses, timePeriod }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+})
 
 export default ExpensesOutput;
