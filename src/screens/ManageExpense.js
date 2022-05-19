@@ -1,78 +1,18 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { View, StyleSheet } from 'react-native';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import ManageExpenseCustomButton from '../components/ManageExpenseCustomButton';
 import ManageExpenseDeleteButton from '../components/ManageExpenseDeleteButton';
 import { GlobalStyles } from '../helpers/styles';
-import { addExpense, updateExpense } from '../redux/expensesSlice';
 
-const ManageExpense = ({ route, navigation }) => {
-  const id = route.params?.expenseId;
-
-  const expenses = useSelector((state) => state.expenses.expenses);
-  const [expense] = expenses.filter((exp) => exp.id === id);
-
-  const dispatch = useDispatch();
-
-  const [inputValues, setInputValues] = useState({
-    amount: '',
-    date: '',
-    title: '',
-  });
-
-  useEffect(() => {
-    if (id)
-      setInputValues({
-        amount: expense.price.toString(),
-        title: expense.title,
-        date: expense.date.toLocaleDateString(),
-      });
-  }, []);
-
-  const inputChangeHandler = (inputIdentifier, newText) => {
-    console.log('changed');
-    setInputValues((prevState) => ({
-      ...prevState,
-      [inputIdentifier]: newText,
-    }));
-  };
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: id ? 'Edit Expense' : 'Add Expense',
-    });
-  }, []);
-
-  const cancelHandler = () => {
-    navigation.goBack();
-  };
-
-  const addExpenseHandler = () => {
-    dispatch(
-      addExpense({
-        price: +inputValues.amount,
-        date: new Date(inputValues.date),
-        title: inputValues.title,
-      })
-    );
-    navigation.goBack();
-  };
-
-  const updateExpenseHandler = () => {
-    dispatch(
-      updateExpense({
-        id: id,
-        updatedExpense: {
-          price: +inputValues.amount,
-          date: new Date(inputValues.date),
-          title: inputValues.title,
-        },
-      })
-    );
-    navigation.goBack();
-  };
-
+const ManageExpense = ({
+  id,
+  inputChangeHandler,
+  cancelHandler,
+  addExpenseHandler,
+  updateExpenseHandler,
+  inputValues,
+  navigation
+}) => {
   if (id) {
     return (
       <View style={styles.container}>

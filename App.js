@@ -6,10 +6,10 @@ import AllExpenses from './src/screens/AllExpenses';
 import RecentExpences from './src/screens/RecentExpences';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AddExpenseButton from './src/components/AddExpenseButton';
-import ManageExpense from './src/screens/ManageExpense';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { GlobalStyles } from './src/helpers/styles';
+import ManageExpenseScreenContainer from './src/screens/ManageExpenseScreenContainer';
 
 const Tabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -82,7 +82,7 @@ export default function App() {
             />
             <Stack.Screen
               name="ManageExpense"
-              component={ManageExpense}
+              component={ManageExpenseScreenContainer}
               options={{
                 presentation: 'modal',
               }}

@@ -16,6 +16,12 @@ const initialState = {
       price: 33.33,
       date: new Date(2022, 4, 14),
     },
+    {
+      id: uuidv4(),
+      title: 'PS3',
+      price: 29.99,
+      date: new Date(2020, 1, 23),
+    }
   ],
 };
 
