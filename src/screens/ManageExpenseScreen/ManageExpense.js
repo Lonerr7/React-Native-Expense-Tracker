@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native';
-import ExpenseForm from '../components/ManageExpense/ExpenseForm';
-import ManageExpenseCustomButton from '../components/ManageExpenseCustomButton';
-import ManageExpenseDeleteButton from '../components/ManageExpenseDeleteButton';
-import { GlobalStyles } from '../helpers/styles';
+import ExpenseForm from '../../components/ManageExpense/ExpenseForm';
+import ManageExpenseCustomButton from '../../components/ManageExpenseCustomButton';
+import ManageExpenseDeleteButton from '../../components/ManageExpenseDeleteButton';
+import { GlobalStyles } from '../../helpers/styles';
 
 const ManageExpense = ({
   id,

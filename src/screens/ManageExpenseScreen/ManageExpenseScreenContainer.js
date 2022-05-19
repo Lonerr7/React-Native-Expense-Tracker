@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpense, updateExpense } from '../redux/expensesSlice';
+import { addExpense, updateExpense } from '../../redux/expensesSlice';
 import ManageExpense from './ManageExpense';
 
 const ManageExpenseScreenContainer = ({ route, navigation }) => {
