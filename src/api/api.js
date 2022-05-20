@@ -9,4 +9,7 @@ export const expensesApi = {
   sendAddedExpense: (expenseData) => {
     return axiosInstance.post('expenses.json', expenseData);
   },
+  getExpenses: () => {
+    return axiosInstance.get(`expenses.json`);
+  },
 };

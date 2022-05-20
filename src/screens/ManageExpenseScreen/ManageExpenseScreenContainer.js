@@ -29,7 +29,7 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
       setInputValues({
         amount: expense.price.toString(),
         title: expense.title,
-        date: expense.date.toLocaleDateString(),
+        date: expense.date,
       });
   }, []);
 
@@ -62,16 +62,9 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
         sendAddedExpenseThunk({
           expenseData: {
             price: +inputValues.amount,
-            date: new Date(inputValues.date),
+            date: inputValues.date,
             title: inputValues.title,
           },
-        })
-      );
-      dispatch(
-        addExpense({
-          price: +inputValues.amount,
-          date: new Date(inputValues.date),
-          title: inputValues.title,
         })
       );
       navigation.goBack();

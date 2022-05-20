@@ -15,7 +15,6 @@ const ExpenseForm = ({ inputValues, inputChangeHandler }) => {
           textInputConfig={{
             keyboardType: 'decimal-pad',
             onChangeText: (newText) => {
-              console.log(newText);
               inputChangeHandler('amount', newText);
             },
             value: inputValues.amount,

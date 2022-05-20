@@ -6,15 +6,23 @@ import AllExpenses from './src/screens/AllExpenses';
 import RecentExpences from './src/screens/RecentExpences';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AddExpenseButton from './src/components/AddExpenseButton';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from './src/redux/store';
 import { GlobalStyles } from './src/helpers/styles';
 import ManageExpenseScreenContainer from './src/screens/ManageExpenseScreen/ManageExpenseScreenContainer';
+import { useEffect } from 'react';
+import { getExpensesThunk } from './src/redux/expensesSlice';
 
 const Tabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const ExpensesOverview = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getExpensesThunk());
+  }, []);
+
   return (
     <Tabs.Navigator
       screenOptions={({ navigation }) => ({

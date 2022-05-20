@@ -16,12 +16,6 @@ const expensesSlice = createSlice({
         (expense) => expense.id !== action.payload.id
       );
     },
-    addExpense: (state, action) => {
-      state.expenses.push({
-        ...action.payload,
-        id: uuidv4(),
-      });
-    },
     updateExpense: (state, action) => {
       state.expenses = state.expenses.map((exp) => {
         if (exp.id === action.payload.id) {
@@ -39,7 +33,30 @@ const expensesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendAddedExpenseThunk.pending, (state, action) => {})
-      .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {});
+      .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {
+        state.expenses.push({ // need to reverse array 
+          title: action.payload.title,
+          date: action.payload.date,
+          price: action.payload.price,
+          id: action.payload.id,
+        });
+      })
+      .addCase(getExpensesThunk.pending, (state, action) => {})
+      .addCase(getExpensesThunk.fulfilled, (state, action) => {
+        const expenses = []; // need to reverse array 
+
+        for (let expense in action.payload) {
+          const expenseItem = {
+            id: expense,
+            title: action.payload[expense].title,
+            date: action.payload[expense].date,
+            price: action.payload[expense].price,
+          };
+          expenses.push(expenseItem);
+        }
+
+        state.expenses = expenses;
+      });
   },
 });
 
@@ -47,7 +64,16 @@ export const sendAddedExpenseThunk = createAsyncThunk(
   'expenses/sendAddedExpenseThunk',
   async function ({ expenseData }) {
     const response = await expensesApi.sendAddedExpense(expenseData);
-    console.log(response.data);
+    return { ...expenseData, id: response.data.name };
+  }
+);
+
+export const getExpensesThunk = createAsyncThunk(
+  'expenses/getExpensesThunk',
+  async function () {
+    const response = await expensesApi.getExpenses();
+
+    return response.data;
   }
 );
 

@@ -20,7 +20,7 @@ const ExpenseItem = ({ title, date, price, id }) => {
         <View style={styles.container}>
           <View style={styles.textBox}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.date}>{date.toLocaleDateString()}</Text>
+            <Text style={styles.date}>{date}</Text>
           </View>
           <View style={styles.priceBox}>
             <Text style={styles.price}>{price}</Text>
