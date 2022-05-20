@@ -2,7 +2,7 @@ import { Pressable, View, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles } from '../helpers/styles';
 import { useDispatch } from 'react-redux';
-import { deleteExpense } from '../redux/expensesSlice';
+import { delteAnExpense } from '../redux/expensesSlice';
 
 const ManageExpenseDeleteButton = ({ id, navigation }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const ManageExpenseDeleteButton = ({ id, navigation }) => {
       <Pressable
         style={({ pressed }) => (pressed ? styles.pressStyle : '')}
         onPress={() => {
-          dispatch(deleteExpense({ id }));
+          dispatch(delteAnExpense({ id }));
           navigation.goBack();
         }}
       >

@@ -11,11 +11,6 @@ const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
   reducers: {
-    deleteExpense: (state, action) => {
-      state.expenses = state.expenses.filter(
-        (expense) => expense.id !== action.payload.id
-      );
-    },
     updateExpense: (state, action) => {
       state.expenses = state.expenses.map((exp) => {
         if (exp.id === action.payload.id) {
@@ -32,7 +27,6 @@ const expensesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(sendAddedExpenseThunk.pending, (state, action) => {})
       .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {
         state.expenses = [
           {
@@ -62,6 +56,12 @@ const expensesSlice = createSlice({
         }
 
         state.expenses = expenses.reverse();
+      })
+      .addCase(delteAnExpense.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.expenses = state.expenses.filter(
+          (expense) => expense.id !== action.payload
+        );
       });
   },
 });
@@ -80,6 +80,15 @@ export const getExpensesThunk = createAsyncThunk(
     const response = await expensesApi.getExpenses();
 
     return response.data;
+  }
+);
+
+export const delteAnExpense = createAsyncThunk(
+  'expenses/deleteAnExpense',
+  async function ({ id }) {
+    const response = await expensesApi.delteExpense(id);
+
+    return id;
   }
 );
 

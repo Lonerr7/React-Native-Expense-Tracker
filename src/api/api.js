@@ -12,4 +12,7 @@ export const expensesApi = {
   getExpenses: () => {
     return axiosInstance.get(`expenses.json`);
   },
+  delteExpense: (id) => {
+    return axiosInstance.delete(`expenses/${id}.json`)
+  }
 };
