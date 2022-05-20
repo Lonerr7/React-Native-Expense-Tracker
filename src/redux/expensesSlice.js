@@ -10,21 +10,7 @@ const initialState = {
 const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
-  reducers: {
-    updateExpense: (state, action) => {
-      state.expenses = state.expenses.map((exp) => {
-        if (exp.id === action.payload.id) {
-          exp = {
-            ...action.payload.updatedExpense,
-            id: exp.id,
-          };
-          return exp;
-        }
-
-        return exp;
-      });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {
@@ -62,6 +48,19 @@ const expensesSlice = createSlice({
         state.expenses = state.expenses.filter(
           (expense) => expense.id !== action.payload
         );
+      })
+      .addCase(updateExpense.fulfilled, (state, action) => {
+        state.expenses = state.expenses.map((exp) => {
+          if (exp.id === action.payload.id) {
+            exp = {
+              ...action.payload.expenseData,
+              id: exp.id,
+            };
+            return exp;
+          }
+
+          return exp;
+        });
       });
   },
 });
@@ -83,6 +82,15 @@ export const getExpensesThunk = createAsyncThunk(
   }
 );
 
+export const updateExpense = createAsyncThunk(
+  'expenses/updateExpense',
+  async function ({ id, expenseData }) {
+    const response = await expensesApi.updateExpense(id, expenseData);
+
+    return { id, expenseData };
+  }
+);
+
 export const delteAnExpense = createAsyncThunk(
   'expenses/deleteAnExpense',
   async function ({ id }) {
@@ -92,6 +100,5 @@ export const delteAnExpense = createAsyncThunk(
   }
 );
 
-export const { deleteExpense, addExpense, updateExpense } =
-  expensesSlice.actions;
+export const { deleteExpense, addExpense } = expensesSlice.actions;
 export default expensesSlice.reducer;

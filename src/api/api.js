@@ -12,7 +12,10 @@ export const expensesApi = {
   getExpenses: () => {
     return axiosInstance.get(`expenses.json`);
   },
+  updateExpense: (id, expenseData) => {
+    return axiosInstance.put(`expenses/${id}.json`, expenseData);
+  },
   delteExpense: (id) => {
-    return axiosInstance.delete(`expenses/${id}.json`)
-  }
+    return axiosInstance.delete(`expenses/${id}.json`);
+  },
 };

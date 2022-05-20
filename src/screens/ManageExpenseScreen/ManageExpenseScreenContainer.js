@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { validateInput } from '../../helpers/helpers';
 import {
-  addExpense,
   sendAddedExpenseThunk,
   updateExpense,
 } from '../../redux/expensesSlice';
@@ -85,14 +84,25 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
     ) {
       dispatch(
         updateExpense({
-          id: id,
-          updatedExpense: {
+          id,
+          expenseData: {
             price: +inputValues.amount,
-            date: new Date(inputValues.date),
+            date: inputValues.date,
             title: inputValues.title,
           },
         })
       );
+
+      // dispatch(
+      //   updateExpense({
+      //     id: id,
+      //     updatedExpense: {
+      //       price: +inputValues.amount,
+      //       date: new Date(inputValues.date),
+      //       title: inputValues.title,
+      //     },
+      //   })
+      // );
       navigation.goBack();
     } else {
       Alert.alert('Invalid Input', 'You passed wrong data to the input', [
