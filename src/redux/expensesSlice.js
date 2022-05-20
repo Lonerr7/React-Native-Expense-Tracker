@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 import { expensesApi } from '../api/api';
 
 const initialState = {
   expenses: [],
+  isFetching: false,
 };
 
 const expensesSlice = createSlice({
@@ -34,16 +34,22 @@ const expensesSlice = createSlice({
     builder
       .addCase(sendAddedExpenseThunk.pending, (state, action) => {})
       .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {
-        state.expenses.push({ // need to reverse array 
-          title: action.payload.title,
-          date: action.payload.date,
-          price: action.payload.price,
-          id: action.payload.id,
-        });
+        state.expenses = [
+          {
+            title: action.payload.title,
+            date: action.payload.date,
+            price: action.payload.price,
+            id: action.payload.id,
+          },
+          ...state.expenses,
+        ];
       })
-      .addCase(getExpensesThunk.pending, (state, action) => {})
+      .addCase(getExpensesThunk.pending, (state) => {
+        state.isFetching = true;
+      })
       .addCase(getExpensesThunk.fulfilled, (state, action) => {
-        const expenses = []; // need to reverse array 
+        state.isFetching = false;
+        const expenses = [];
 
         for (let expense in action.payload) {
           const expenseItem = {
@@ -55,7 +61,7 @@ const expensesSlice = createSlice({
           expenses.push(expenseItem);
         }
 
-        state.expenses = expenses;
+        state.expenses = expenses.reverse();
       });
   },
 });

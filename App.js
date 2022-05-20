@@ -42,6 +42,7 @@ const ExpensesOverview = () => {
         headerTintColor: 'white',
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
       })}
+      initialRouteName='All'
     >
       <Tabs.Screen
         name="Recent"
