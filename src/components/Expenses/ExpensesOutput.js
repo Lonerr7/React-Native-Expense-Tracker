@@ -32,7 +32,7 @@ const ExpensesOutput = ({ expenses, timePeriod }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
-})
+  },
+});
 
 export default ExpensesOutput;

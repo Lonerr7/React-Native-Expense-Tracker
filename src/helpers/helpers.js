@@ -10,3 +10,15 @@ export const filterDates = (arr) => {
     (item) => Math.floor((now - item.date) / (1000 * 60 * 60 * 24)) <= 7
   );
 };
+
+export const validateInput = (price, date, title) => {
+  const validPice = !isNaN(price) && price > 0;
+  const validDate = date.toString() !== 'Invalid Date';
+  const validTitle = title.trim().length > 0;
+
+  if (validDate && validPice && validTitle) {
+    return true;
+  }
+
+  return false;
+};

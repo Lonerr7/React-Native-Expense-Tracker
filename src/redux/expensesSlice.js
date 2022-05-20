@@ -1,28 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import { expensesApi } from '../api/api';
 
 const initialState = {
-  expenses: [
-    {
-      id: uuidv4(),
-      title: 'Computer',
-      price: 14.99,
-      date: new Date(2022, 4, 14),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS5',
-      price: 33.33,
-      date: new Date(2022, 4, 14),
-    },
-    {
-      id: uuidv4(),
-      title: 'PS3',
-      price: 29.99,
-      date: new Date(2020, 1, 23),
-    }
-  ],
+  expenses: [],
 };
 
 const expensesSlice = createSlice({
@@ -54,7 +36,20 @@ const expensesSlice = createSlice({
       });
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(sendAddedExpenseThunk.pending, (state, action) => {})
+      .addCase(sendAddedExpenseThunk.fulfilled, (state, action) => {});
+  },
 });
+
+export const sendAddedExpenseThunk = createAsyncThunk(
+  'expenses/sendAddedExpenseThunk',
+  async function ({ expenseData }) {
+    const response = await expensesApi.sendAddedExpense(expenseData);
+    console.log(response.data);
+  }
+);
 
 export const { deleteExpense, addExpense, updateExpense } =
   expensesSlice.actions;

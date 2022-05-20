@@ -9,7 +9,7 @@ import AddExpenseButton from './src/components/AddExpenseButton';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { GlobalStyles } from './src/helpers/styles';
-import ManageExpenseScreenContainer from './src/screens/ManageExpense/ManageExpenseScreenContainer';
+import ManageExpenseScreenContainer from './src/screens/ManageExpenseScreen/ManageExpenseScreenContainer';
 
 const Tabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
