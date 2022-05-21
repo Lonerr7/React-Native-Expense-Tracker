@@ -51,11 +51,7 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
 
   const addExpenseHandler = () => {
     if (
-      validateInput(
-        +inputValues.amount,
-        new Date(inputValues.date),
-        inputValues.title
-      )
+      validateInput(+inputValues.amount, inputValues.date, inputValues.title)
     ) {
       dispatch(
         sendAddedExpenseThunk({
@@ -78,7 +74,7 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
     if (
       validateInput(
         +inputValues.amount,
-        new Date(inputValues.date),
+        inputValues.date,
         inputValues.title
       )
     ) {
@@ -93,16 +89,6 @@ const ManageExpenseScreenContainer = ({ route, navigation }) => {
         })
       );
 
-      // dispatch(
-      //   updateExpense({
-      //     id: id,
-      //     updatedExpense: {
-      //       price: +inputValues.amount,
-      //       date: new Date(inputValues.date),
-      //       title: inputValues.title,
-      //     },
-      //   })
-      // );
       navigation.goBack();
     } else {
       Alert.alert('Invalid Input', 'You passed wrong data to the input', [

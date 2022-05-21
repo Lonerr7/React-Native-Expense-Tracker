@@ -44,7 +44,6 @@ const expensesSlice = createSlice({
         state.expenses = expenses.reverse();
       })
       .addCase(delteAnExpense.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.expenses = state.expenses.filter(
           (expense) => expense.id !== action.payload
         );
@@ -87,7 +86,7 @@ export const updateExpense = createAsyncThunk(
   async function ({ id, expenseData }) {
     const response = await expensesApi.updateExpense(id, expenseData);
 
-    return { id, expenseData };
+    if (response.status === 200) return { id, expenseData };
   }
 );
 

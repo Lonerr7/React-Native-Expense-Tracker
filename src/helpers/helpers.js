@@ -14,7 +14,7 @@ export const filterDates = (arr) => {
 
 export const validateInput = (price, date, title) => {
   const validPice = !isNaN(price) && price > 0;
-  const validDate = date.toString() !== 'Invalid Date';
+  const validDate = date.match(/\d\d\d\d-\d\d-\d\d/g);
   const validTitle = title.trim().length > 0;
 
   if (validDate && validPice && validTitle) {
